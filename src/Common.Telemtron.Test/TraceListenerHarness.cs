@@ -11,6 +11,7 @@ namespace Polytech.Common.Telemetron
 {
     public class TraceListenerHarness : IDisposable, IList<TraceEventEvent>
     {
+        private static readonly char[] spaceSplitChars = new char[] {' '};
         private TraceSource source;
         private HarnessTraceListener listener;
 
@@ -72,7 +73,7 @@ namespace Polytech.Common.Telemetron
 
             foreach (string data in datas)
             {
-                string[] parts = data.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string[] parts = data.Split(spaceSplitChars, StringSplitOptions.RemoveEmptyEntries);
 
                 if (long.TryParse(parts[position], out long foundValue))
                 {
